@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Conteneurs Pro</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #005b82, #007ea7);
+      color: white;
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      background-color: #ffcb05;
+      color: #000;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+
+    .btn:hover {
+      background-color: #e6b800;
+    }
+
+    .images {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .images img {
+      width: 280px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    /* MODALE */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    .modal-content label {
+      display: block;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+
+    .modal-content input,
+    .modal-content textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .modal-content button {
+      margin-top: 20px;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      .images img {
+        width: 90%;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Conteneurs Pro</h1>
+    <p>Vente et location de conteneurs maritimes partout en France. Qualité garantie, prix imbattables.</p>
+    <button class="btn" onclick="openModal()">Demander un devis</button>
+    <div class="images">
+      <img src="https://cdn.pixabay.com/photo/2016/11/18/18/20/container-1838013_640.jpg" alt="Conteneur Standard" />
+      <img src="https://cdn.pixabay.com/photo/2020/11/24/15/48/container-5761286_640.jpg" alt="Conteneur Frigorifique" />
+      <img src="https://cdn.pixabay.com/photo/2017/09/22/14/54/container-house-2776231_1280.jpg" alt="Conteneur Maison" />
+    </div>
+  </header>
+
+  <!-- Formulaire de demande de devis -->
+  <div class="modal" id="quoteModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Demande de devis</h2>
+      <form onsubmit="envoyerDemande(event)">
+        <label for="name">Nom complet</label>
+        <input type="text" id="name" required>
+
+        <label for="email">Adresse email</label>
+        <input type="email" id="email" required>
+
+        <label for="phone">Téléphone</label>
+        <input type="tel" id="phone" required>
+
+        <label for="message">Votre demande</label>
+        <textarea id="message" rows="4" placeholder="Quel type de conteneur ? Livraison où ?"></textarea>
+
+        <button class="btn" type="submit">Envoyer</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function openModal() {
+      document.getElementById('quoteModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('quoteModal').style.display = 'none';
+    }
+
+    function envoyerDemande(event) {
+      event.preventDefault();
+      alert("Merci ! Votre demande a bien été envoyée.");
+      closeModal();
+    }
+
+    // Fermer avec ESC ou clic hors modale
+    window.addEventListener('keydown', function(e) {
+      if (e.key === "Escape") closeModal();
+    });
+
+    window.addEventListener('click', function(e) {
+      if (e.target === document.getElementById('quoteModal')) closeModal();
+    });
+  </script>
+
+</body>
+</html>
